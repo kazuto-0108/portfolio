@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>メニュー｜汐見坂コーヒー（制作見本）</title>
+<meta name="description" content="汐見坂コーヒーのメニュー。自家焙煎の珈琲、焼き菓子、軽食、珈琲豆の販売。※架空の店舗を題材にした Web 制作の見本です。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="logo" href="index.html"><span class="logo__ja">汐見坂コーヒー</span><span class="logo__en">SHIOMIZAKA COFFEE</span></a>
+    <input class="nav__toggle" type="checkbox" id="nav-toggle" aria-label="メニューを開く">
+    <label class="nav__btn" for="nav-toggle">MENU</label>
+    <nav class="nav" aria-label="サイト内メニュー">
+      <ul class="nav__list">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="menu.html" aria-current="page">メニュー</a></li>
+        <li><a href="access.html">店舗案内</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a class="nav__cta" href="contact.html">ご予約・お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="pagehead">
+    <div class="wrap">
+      <p class="eyebrow">Menu</p>
+      <h1>メニュー</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <ul class="menu-nav">
+        <li><a href="#coffee">珈琲</a></li>
+        <li><a href="#drink">その他のお飲みもの</a></li>
+        <li><a href="#sweets">焼き菓子・ケーキ</a></li>
+        <li><a href="#food">軽食</a></li>
+        <li><a href="#beans">珈琲豆の販売</a></li>
+      </ul>
+
+      <!-- メニューの更新: <li> を1行足す／消すだけで反映される。価格は税込で書く -->
+      <div class="menu-group" id="coffee">
+        <h2>珈琲<small>COFFEE</small></h2>
+        <div class="menu-cols">
+          <ul class="menu-list">
+            <li><span class="name">汐見ブレンド</span><span class="price">550円</span><span class="desc">中煎り。やわらかな甘みと後味の軽さ。迷ったらまずこちらを。</span></li>
+            <li><span class="name">坂道ブレンド（深煎り）</span><span class="price">580円</span><span class="desc">しっかりした苦みとコク。ミルクや焼き菓子とよく合います。</span></li>
+            <li><span class="name">冬のブレンド「灯」</span><span class="price">600円</span><span class="desc">季節限定。カカオのような香りと、冷めてから出てくる甘み。</span></li>
+            <li><span class="name">本日のシングルオリジン</span><span class="price">650円〜</span><span class="desc">その週に焼いた豆から1種類。産地と焙煎度は店頭の黒板でご案内します。</span></li>
+            <li><span class="name">カフェラテ（ホット／アイス）</span><span class="price">620円</span><span class="desc">深煎りのエスプレッソに、温めたミルクをたっぷりと。</span></li>
+            <li><span class="name">水出しアイスコーヒー</span><span class="price">580円</span><span class="desc">8時間かけて抽出。すっきりした飲み口です。</span></li>
+          </ul>
+          <img src="img/latte.jpg" alt="木のテーブルに置かれたカフェラテ。葉の模様のラテアート" width="1000" height="667" loading="lazy">
+        </div>
+      </div>
+
+      <div class="menu-group" id="drink">
+        <h2>その他のお飲みもの<small>DRINKS</small></h2>
+        <ul class="menu-list">
+            <li><span class="name">紅茶（ポット）</span><span class="price">600円</span><span class="desc">ダージリン／アールグレイ。約2杯分です。</span></li>
+            <li><span class="name">自家製ジンジャーエール</span><span class="price">580円</span><span class="desc">生姜とスパイスを煮出したシロップを炭酸で割っています。</span></li>
+            <li><span class="name">りんごジュース</span><span class="price">500円</span><span class="desc">果汁100％。お子さまにも。</span></li>
+        </ul>
+      </div>
+
+      <div class="menu-group" id="sweets">
+        <h2>焼き菓子・ケーキ<small>SWEETS</small></h2>
+        <div class="menu-cols">
+          <ul class="menu-list">
+            <li><span class="name">レモンのパウンドケーキ</span><span class="price">480円</span><span class="desc">国産レモンの皮と果汁を使った定番。ほどよい酸味です。</span></li>
+            <li><span class="name">ブルーベリーのチーズケーキ</span><span class="price">560円</span><span class="desc">濃厚なベイクドチーズに、甘さ控えめのブルーベリーソース。</span></li>
+            <li><span class="name">季節のタルト</span><span class="price">600円</span><span class="desc">11月は洋梨。果物は月ごとに替わります。</span></li>
+            <li><span class="name">スコーン（2個）</span><span class="price">450円</span><span class="desc">クロテッドクリームと自家製ジャム付き。</span></li>
+            <li><span class="name">ケーキセット</span><span class="price">50円引き</span><span class="desc">お好きなケーキとお飲みものを一緒にご注文いただくと、合計から50円引きになります。</span></li>
+          </ul>
+          <img src="img/cheesecake.jpg" alt="ブルーベリーのチーズケーキとカフェラテ" width="1000" height="667" loading="lazy">
+        </div>
+      </div>
+
+      <div class="menu-group" id="food">
+        <h2>軽食<small>FOOD</small></h2>
+        <ul class="menu-list">
+            <li><span class="name">厚切りバタートースト</span><span class="price">480円</span><span class="desc">近所のパン屋さんの食パンを厚切りで。＋100円で小倉あんを添えられます。</span></li>
+            <li><span class="name">ハムとチーズのホットサンド</span><span class="price">780円</span><span class="desc">サラダ付き。11:00〜14:00 はお飲みものとセットで100円引き。</span></li>
+            <li><span class="name">野菜のスープとパン</span><span class="price">720円</span><span class="desc">その日の野菜で作るスープ。内容は店頭でご案内します。</span></li>
+        </ul>
+      </div>
+
+      <div class="menu-group" id="beans">
+        <h2>珈琲豆の販売<small>BEANS</small></h2>
+        <div class="menu-cols">
+          <ul class="menu-list">
+            <li><span class="name">汐見ブレンド 200g</span><span class="price">1,500円</span><span class="desc">中煎り。</span></li>
+            <li><span class="name">坂道ブレンド 200g</span><span class="price">1,500円</span><span class="desc">深煎り。</span></li>
+            <li><span class="name">冬のブレンド「灯」 200g</span><span class="price">1,600円</span><span class="desc">季節限定。2月末までの販売です。</span></li>
+            <li><span class="name">シングルオリジン各種 200g</span><span class="price">1,700円〜</span><span class="desc">常時3種類。100g からお分けできます。</span></li>
+            <li><span class="name">ドリップバッグ 5個入り</span><span class="price">900円</span><span class="desc">贈りものにも。</span></li>
+          </ul>
+          <img src="img/beans.jpg" alt="カップに入った焙煎済みの珈琲豆" width="1000" height="667" loading="lazy">
+        </div>
+        <p class="note" style="margin-top:24px">豆のままでも、ご家庭の器具に合わせて挽いてからでもお渡しできます。</p>
+      </div>
+
+      <p class="note">表示価格はすべて税込です。小麦・卵・乳・ナッツなどのアレルギーをお持ちの方は、ご注文の際にスタッフへお申し出ください。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="logo" href="index.html"><span class="logo__ja">汐見坂コーヒー</span><span class="logo__en">SHIOMIZAKA COFFEE</span></a>
+        <p style="margin-top:16px">東京都汐見区汐見町1-2-3<br>10:00〜19:00（水曜・第3火曜 定休）<br>電話 03-0000-0000</p>
+      </div>
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="menu.html">メニュー</a></li>
+        <li><a href="access.html">店舗案内</a></li>
+      </ul>
+      <ul>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="contact.html">ご予約・お問い合わせ</a></li>
+      </ul>
+    </div>
+    <p class="footer__sample">このサイトは Web 制作の見本です。店名・住所・電話番号・メニュー・お知らせの内容はすべて架空のもので、実在の店舗とは関係ありません。写真は CC0（パブリックドメイン）の素材を使用しています。</p>
+  </div>
+</footer>
+</body>
+</html>

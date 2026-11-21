@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>connectpkazu｜Web 制作と業務ツール開発の制作見本</title>
+<meta name="description" content="現役フルスタックエンジニア connectpkazu の制作見本。店舗サイト、採用 LP、業務ツールのデモと、対応範囲・進め方をまとめています。">
+<meta name="robots" content="noindex">
+<style>
+:root { --ink: #1c1f24; --soft: #5d6570; --bg: #fbfaf7; --card: #fff; --line: #e4e1da; --acc: #1f5f5b; --acc-soft: #e8f1f0;
+  --font: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", Meiryo, sans-serif; }
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.9; }
+h1, h2, h3, p, ul, ol { margin: 0; padding: 0; }
+h1, h2, h3 { line-height: 1.5; text-wrap: balance; }
+ul, ol { list-style: none; }
+a { color: var(--acc); }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.sec { padding: clamp(48px, 8vw, 88px) 0; border-top: 1px solid var(--line); scroll-margin-top: 56px; }
+.label { font-size: 12px; letter-spacing: .2em; color: var(--acc); font-weight: 700; margin-bottom: 8px; }
+.h2 { font-size: clamp(22px, 3.2vw, 30px); margin-bottom: 12px; }
+.lead { color: var(--soft); max-width: 42em; margin-bottom: 36px; }
+
+.head { position: sticky; top: 0; background: rgba(251, 250, 247, .95); border-bottom: 1px solid var(--line); z-index: 10; }
+.head .wrap { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+.head b { letter-spacing: .04em; }
+.head nav { display: flex; gap: 20px; font-size: 14px; }
+.head nav a { color: var(--ink); text-decoration: none; }
+.head nav a:hover { color: var(--acc); }
+
+.hero { padding: clamp(56px, 10vw, 120px) 0 clamp(48px, 8vw, 96px); }
+.hero p.label { margin-bottom: 16px; }
+.hero h1 { font-size: clamp(28px, 5vw, 48px); letter-spacing: .02em; margin-bottom: 24px; }
+.hero h1 span { color: var(--acc); }
+.hero .lead { font-size: clamp(15px, 1.8vw, 17px); margin-bottom: 28px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { font-size: 13px; background: var(--acc-soft); color: var(--acc); border-radius: 999px; padding: 4px 14px; font-weight: 700; }
+
+.works { display: grid; gap: 28px; }
+.work { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 4vw, 40px); background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: clamp(16px, 3vw, 28px); align-items: center; }
+.work__img { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: block; }
+.work__img img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform .3s; }
+.work__img:hover img { transform: scale(1.02); }
+.work__kind { font-size: 12px; font-weight: 700; color: var(--acc); letter-spacing: .1em; }
+.work h3 { font-size: 21px; margin: 2px 0 10px; }
+.work p { font-size: 15px; color: var(--soft); margin-bottom: 12px; }
+.work dl { margin: 0 0 18px; font-size: 13px; display: grid; grid-template-columns: 5.5em 1fr; gap: 4px 12px; }
+.work dt { color: var(--soft); }
+.work dd { margin: 0; }
+.btn { display: inline-flex; align-items: center; min-height: 46px; padding: 8px 24px; border-radius: 999px; background: var(--acc); color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; }
+.btn:hover { background: #174946; }
+.btn::after { content: "→"; margin-left: 8px; font-weight: 400; }
+.note { font-size: 13px; color: var(--soft); margin-top: 20px; }
+
+.can { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.can li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.can h3 { font-size: 17px; margin-bottom: 8px; }
+.can p { font-size: 14px; color: var(--soft); }
+.out { margin-top: 24px; font-size: 14px; color: var(--soft); background: #f3f1ec; border-radius: 10px; padding: 16px 20px; }
+.out b { color: var(--ink); }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
+.steps li { counter-increment: s; border-top: 3px solid var(--acc); padding-top: 14px; }
+.steps li::before { content: "0" counter(s); font-size: 13px; font-weight: 700; color: var(--acc); letter-spacing: .1em; }
+.steps h3 { font-size: 16px; margin: 2px 0 6px; }
+.steps p { font-size: 14px; color: var(--soft); }
+
+.about { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(24px, 5vw, 56px); }
+.about p { margin-bottom: 1em; }
+.facts { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 8px 24px; align-self: start; }
+.facts li { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; display: grid; grid-template-columns: 6em 1fr; gap: 12px; }
+.facts li:last-child { border-bottom: 0; }
+.facts span { color: var(--soft); }
+
+.foot { border-top: 1px solid var(--line); padding: 32px 0 48px; font-size: 12px; color: var(--soft); }
+
+@media (max-width: 760px) {
+  body { font-size: 15px; }
+  .head nav a:nth-child(n+3) { display: none; }
+  .work, .about { grid-template-columns: 1fr; }
+  .can { grid-template-columns: 1fr; gap: 12px; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .work__img img { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="head">
+  <div class="wrap">
+    <b>connectpkazu</b>
+    <nav aria-label="ページ内メニュー">
+      <a href="#works">制作見本</a>
+      <a href="#can">対応範囲</a>
+      <a href="#flow">進め方</a>
+      <a href="#about">自己紹介</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="label">WEB 制作・業務ツール開発</p>
+      <h1>小さなご依頼にも、<br><span>本業と同じ品質</span>で。</h1>
+      <p class="lead">現役のフルスタックエンジニア・スクラムマスターの connectpkazu です。店舗のホームページ、ランディングページ、日々の手作業を減らす業務ツールを、要件の整理から公開・運用の手引きまで一人で担当します。このページでは、制作の見本と進め方をご覧いただけます。</p>
+      <ul class="chips">
+        <li>スマートフォン対応</li>
+        <li>動く見本を先にお見せします</li>
+        <li>運用の手引きつき</li>
+        <li>ご連絡には原則24時間以内に返信</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="works">
+    <div class="wrap">
+      <p class="label">WORKS</p>
+      <h2 class="h2">制作見本</h2>
+      <p class="lead">型のちがう3つの見本です。いずれも架空の題材で、このページのために制作しました。画像を押すと実際のページが開きます。スマートフォンでもご覧ください。</p>
+      <div class="works">
+        <article class="work">
+          <a class="work__img" href="cafe/index.html"><img src="assets/cafe.jpg" alt="汐見坂コーヒーのトップページの画面" width="960" height="600"></a>
+          <div>
+            <span class="work__kind">店舗のホームページ</span>
+            <h3>汐見坂コーヒー（カフェ・5ページ）</h3>
+            <p>トップ、メニュー、店舗案内、お知らせ、ご予約・お問い合わせの5ページ構成。写真と余白を主役に、落ち着いた雰囲気でまとめました。</p>
+            <dl>
+              <dt>見どころ</dt><dd>複数ページの設計、スマートフォン用のメニュー、予約フォーム、略図のアクセスマップ</dd>
+              <dt>作り方</dt><dd>HTML と CSS のみ。メニューやお知らせを、HTML の決まった場所に足して更新できる構成</dd>
+            </dl>
+            <a class="btn" href="cafe/index.html">見本を開く</a>
+          </div>
+        </article>
+        <article class="work">
+          <a class="work__img" href="pharmacy-recruit/index.html"><img src="assets/pharmacy-recruit.jpg" alt="こはる坂薬局 薬剤師採用ページの画面" width="960" height="600"></a>
+          <div>
+            <span class="work__kind">ランディングページ（採用）</span>
+            <h3>こはる坂薬局 薬剤師採用（縦長1ページ）</h3>
+            <p>読み手の悩みへの共感から、働き方、1日の流れ、先輩の声、募集要項、よくある質問、応募フォームまでを1ページで運ぶ構成です。</p>
+            <dl>
+              <dt>見どころ</dt><dd>応募まで迷わせない流れ、画面に追従する応募ボタン、開閉するよくある質問、文章の設計</dd>
+              <dt>作り方</dt><dd>HTML と CSS のみ。写真の代わりに、図形で作った仮の図を置いています（実際の制作ではご支給の写真に差し替えます）</dd>
+            </dl>
+            <a class="btn" href="pharmacy-recruit/index.html">見本を開く</a>
+          </div>
+        </article>
+        <article class="work">
+          <a class="work__img" href="ops-demo/index.html"><img src="assets/ops-demo.jpg" alt="店舗日報ボードの当日の集計画面" width="960" height="600"></a>
+          <div>
+            <span class="work__kind">業務ツール（動くデモ）</span>
+            <h3>店舗日報ボード（4店舗の売上と勤怠の集計）</h3>
+            <p>日報を入力すると、当日の集計、前日比、月次の表までその場で更新されます。未提出の店舗や、前日より大きく下がった店舗もひと目で分かります。</p>
+            <dl>
+              <dt>見どころ</dt><dd>業務の流れを画面に落とす設計、入力の確認、CSV の書き出し、導入するときの構成図</dd>
+              <dt>作り方</dt><dd>HTML・CSS・JavaScript。実際の導入は Google スプレッドシートと GAS などで行います</dd>
+            </dl>
+            <a class="btn" href="ops-demo/index.html">デモを動かす</a>
+          </div>
+        </article>
+      </div>
+      <p class="note">※3つとも制作見本です。店舗・企業・人物・数値はすべて架空で、お客さまからお預かりした資料や情報は含みません。見本のフォームに入力した内容は、どこにも送信・保存されません。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="can">
+    <div class="wrap">
+      <p class="label">SERVICE</p>
+      <h2 class="h2">対応範囲</h2>
+      <p class="lead">「システム会社に頼むほどではないけれど、きちんと作ってほしい」というご依頼を中心にお受けしています。</p>
+      <ul class="can">
+        <li><h3>ホームページ・LP の制作</h3><p>店舗や事業の紹介サイト、採用・セミナー・商品のランディングページ。スマートフォン対応、お問い合わせフォーム、公開の作業まで対応します。</p></li>
+        <li><h3>業務の自動化</h3><p>集計・転記・帳票づくりなどの定型作業を、Google スプレッドシートと GAS、Python などで自動化します。課題に合わせて手段を選びます。</p></li>
+        <li><h3>業務ツール・連携の開発</h3><p>入力画面と集計の仕組み、Slack や LINE への通知、外部サービスとの連携、AI（ChatGPT・Claude など）の業務への組み込み。</p></li>
+      </ul>
+      <p class="out"><b>あらかじめお伝えしていること：</b>写真の撮影、ロゴやイラストの制作は対応していません（写真や素材をご支給いただくか、利用条件を確認した無料素材を使います）。表示と動作の確認は iPhone と Mac のブラウザ（Chrome・Safari）で行います。Windows・Android の実機での確認はできません。稼働は平日の夜と土日が中心です。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="flow">
+    <div class="wrap">
+      <p class="label">PROCESS</p>
+      <h2 class="h2">進め方</h2>
+      <p class="lead">あいまいなまま作り始めず、小さく確認しながら進めます。</p>
+      <ol class="steps">
+        <li><h3>ご要望の整理</h3><p>目的、載せたい内容、参考にしたいサイトをうかがい、作るものと範囲を文章にまとめます。</p></li>
+        <li><h3>見本のご提示</h3><p>早い段階で、実際に動く画面をお見せします。完成の姿を見ながら調整できます。</p></li>
+        <li><h3>制作と確認</h3><p>区切りごとに途中の状態をお見せします。スマートフォンでの表示と動作も確認します。</p></li>
+        <li><h3>納品とお引き渡し</h3><p>更新や運用の手引きを添えてお渡しします。納品後のご質問にもお答えします。</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="about">
+    <div class="wrap">
+      <p class="label">ABOUT</p>
+      <h2 class="h2">自己紹介</h2>
+      <div class="about">
+        <div>
+          <p>以前はシステム開発会社でフルスタックエンジニアとして、Web システムの設計から実装、運用までを一貫して担当し、スクラムマスターとしてチーム開発の進行と品質の管理も務めていました。現在は別の会社で、開発者・スクラムマスターとして働いています。</p>
+          <p>あわせて、家族が経営する会社の業務効率化を担当し、集計・転記・帳票づくりといった定型作業を自動化して実際に運用しています。IT の専任担当がいない現場で、何が負担になり、どこまで作れば足りるのかを、当事者として見てきました。</p>
+          <p>本業のチーム開発で行っていること（要件の言語化、自動テスト、確認の手順、文書の整備）を、個人のご依頼でも同じように行います。制作には AI（Claude など）も活用し、できあがったものは自分で確認してからお渡しします。</p>
+        </div>
+        <ul class="facts">
+          <li><span>活動名</span>connectpkazu（クラウドワークスの表示名と同じです）</li>
+          <li><span>対応分野</span>業務の自動化、業務ツールの開発、Web 制作</li>
+          <li><span>主な技術</span>JavaScript / TypeScript / Python / Google Apps Script / SQL / HTML / CSS</li>
+          <li><span>稼働</span>平日の夜と土日を中心に、週10時間ほど</li>
+          <li><span>ご連絡</span>クラウドワークスなど、ご依頼いただいたサービスのメッセージでお願いします</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>© connectpkazu　このページと制作見本は、ご依頼を検討いただく方に向けた紹介用です。見本の写真は CC0（パブリックドメイン）の素材を使用しています。</p>
+  </div>
+</footer>
+</body>
+</html>

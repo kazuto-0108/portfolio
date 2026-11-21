@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ご予約・お問い合わせ｜汐見坂コーヒー（制作見本）</title>
+<meta name="description" content="汐見坂コーヒーのお席の予約とお問い合わせ。※架空の店舗を題材にした Web 制作の見本です。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="logo" href="index.html"><span class="logo__ja">汐見坂コーヒー</span><span class="logo__en">SHIOMIZAKA COFFEE</span></a>
+    <input class="nav__toggle" type="checkbox" id="nav-toggle" aria-label="メニューを開く">
+    <label class="nav__btn" for="nav-toggle">MENU</label>
+    <nav class="nav" aria-label="サイト内メニュー">
+      <ul class="nav__list">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="menu.html">メニュー</a></li>
+        <li><a href="access.html">店舗案内</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a class="nav__cta" href="contact.html" aria-current="page">ご予約・お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="pagehead">
+    <div class="wrap">
+      <p class="eyebrow">Reservation / Contact</p>
+      <h1>ご予約・お問い合わせ</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 class="title">お電話で</h2>
+        <div class="telbox">
+          <span class="note">当日のご予約はお電話でお願いします</span>
+          <a class="tel" href="tel:0300000000">03-0000-0000</a>
+          <span class="note">受付 10:00〜19:00（水曜・第3火曜を除く）</span>
+        </div>
+        <h2 class="title" style="margin-top:48px;font-size:20px">ご予約について</h2>
+        <ul class="note" style="padding-left:1.2em;font-size:14px;line-height:2">
+          <li>フォームからのご予約は、ご希望日の3営業日前までにお送りください。</li>
+          <li>2営業日以内に、メールまたはお電話で確定のご連絡をします。ご連絡をもってご予約成立となります。</li>
+          <li>お席のご利用は2時間までとさせていただきます。</li>
+          <li>貸切は平日の17時以降、10名さまから承ります。</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="title">フォームで</h2>
+        <!-- 見本のため送信先を持たない（入力内容はどこにも送られない）。
+             実際の制作では、フォーム送信サービスまたはメール送信のプログラムに接続する -->
+        <form class="form" action="thanks.html" method="get">
+          <fieldset>
+            <legend>ご用件<span class="req">必須</span></legend>
+            <div class="radios">
+              <label><input type="radio" name="kind" required checked> お席の予約</label>
+              <label><input type="radio" name="kind"> 貸切のご相談</label>
+              <label><input type="radio" name="kind"> ドリップ教室の申し込み</label>
+              <label><input type="radio" name="kind"> その他のお問い合わせ</label>
+            </div>
+          </fieldset>
+          <div class="form__row">
+            <div>
+              <label for="f-date">ご希望日</label>
+              <input type="date" id="f-date">
+            </div>
+            <div>
+              <label for="f-time">お時間</label>
+              <select id="f-time">
+                <option value="">選択してください</option>
+                <option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option>
+                <option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option>
+              </select>
+            </div>
+            <div>
+              <label for="f-num">人数</label>
+              <select id="f-num">
+                <option value="">選択してください</option>
+                <option>1名</option><option>2名</option><option>3名</option><option>4名</option>
+                <option>5名</option><option>6名</option><option>7名以上（ご相談）</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="f-name">お名前<span class="req">必須</span></label>
+            <input type="text" id="f-name" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="f-tel">電話番号<span class="req">必須</span></label>
+            <input type="tel" id="f-tel" autocomplete="tel" inputmode="tel" placeholder="例）090-0000-0000" required>
+          </div>
+          <div>
+            <label for="f-mail">メールアドレス<span class="req">必須</span></label>
+            <input type="email" id="f-mail" autocomplete="email" placeholder="例）name@example.com" required>
+          </div>
+          <div>
+            <label for="f-msg">ご要望・お問い合わせ内容</label>
+            <textarea id="f-msg" placeholder="お席のご希望、アレルギー、ベビーカーのご利用など"></textarea>
+          </div>
+          <p class="note" style="margin:0">これは制作見本のフォームです。入力した内容はどこにも送信・保存されません。</p>
+          <button class="btn btn--fill" type="submit">この内容で送信する</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="logo" href="index.html"><span class="logo__ja">汐見坂コーヒー</span><span class="logo__en">SHIOMIZAKA COFFEE</span></a>
+        <p style="margin-top:16px">東京都汐見区汐見町1-2-3<br>10:00〜19:00（水曜・第3火曜 定休）<br>電話 03-0000-0000</p>
+      </div>
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="menu.html">メニュー</a></li>
+        <li><a href="access.html">店舗案内</a></li>
+      </ul>
+      <ul>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="contact.html">ご予約・お問い合わせ</a></li>
+      </ul>
+    </div>
+    <p class="footer__sample">このサイトは Web 制作の見本です。店名・住所・電話番号・メニュー・お知らせの内容はすべて架空のもので、実在の店舗とは関係ありません。写真は CC0（パブリックドメイン）の素材を使用しています。</p>
+  </div>
+</footer>
+</body>
+</html>

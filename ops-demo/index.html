@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>店舗日報ボード｜4店舗の売上と勤怠の集計デモ（制作見本）</title>
+<meta name="description" content="4店舗の日報（売上・客数・勤怠）を入力すると、当日の集計・前日比・月次の表まで自動で更新される業務ツールのデモです。ブラウザだけで動きます。※架空の会社を題材にした制作見本です。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top__in">
+    <div class="top__name">
+      <b>店舗日報ボード</b>
+      <span>サンプル商事（架空）・4店舗</span>
+    </div>
+    <span class="badge">デモ：ダミーデータ／ブラウザ内だけで動作</span>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="画面の切り替え">
+    <button role="tab" id="tab-daily" aria-controls="p-daily" aria-selected="true">① 当日の集計</button>
+    <button role="tab" id="tab-input" aria-controls="p-input" aria-selected="false">② 日報の入力</button>
+    <button role="tab" id="tab-monthly" aria-controls="p-monthly" aria-selected="false">③ 月次の表</button>
+    <button role="tab" id="tab-how" aria-controls="p-how" aria-selected="false">④ しくみ</button>
+  </nav>
+</header>
+
+<main class="main">
+  <p class="guide" id="guide">
+    <b>試し方：</b>11月20日は「横浜店」の日報がまだ出ていません。<button class="link" id="guide-go">② 日報の入力</button>で横浜店の数字を入れて登録すると、当日の集計・前日比・月次の表がその場で更新されます。
+  </p>
+
+  <!-- ① 当日の集計 -->
+  <section class="panel" id="p-daily" role="tabpanel" aria-labelledby="tab-daily">
+    <div class="bar">
+      <h1>当日の集計</h1>
+      <div class="datenav">
+        <button id="d-prev" aria-label="前の日">◀</button>
+        <input type="date" id="d-date" aria-label="集計する日">
+        <button id="d-next" aria-label="次の日">▶</button>
+      </div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <h2>店舗別</h2>
+    <div class="scroll"><table class="tbl" id="t-daily"></table></div>
+    <p class="hint">前日比が −10% を下回ると「要確認」、日報がない店舗は「未提出」と表示します。人時売上高 ＝ 売上 ÷ 労働時間の合計。</p>
+    <h2>勤怠（この日の出勤）</h2>
+    <div class="scroll"><table class="tbl" id="t-shifts"></table></div>
+    <p class="hint">「8時間超」は、休憩を除いた労働時間が1日8時間を超えた分です（週40時間を超えた分の判定は、このデモには含めていません）。</p>
+  </section>
+
+  <!-- ② 日報の入力 -->
+  <section class="panel" id="p-input" role="tabpanel" aria-labelledby="tab-input" hidden>
+    <div class="bar"><h1>日報の入力</h1></div>
+    <form id="form" class="form" novalidate>
+      <div class="form__grid">
+        <label>日付<input type="date" id="f-date" required></label>
+        <label>店舗<select id="f-store" required></select></label>
+        <label>売上（円・税込）<input type="number" id="f-sales" inputmode="numeric" min="0" step="1" placeholder="例）131000" max="99999999" required></label>
+        <label>客数（人）<input type="number" id="f-cust" inputmode="numeric" min="0" step="1" placeholder="例）71" max="99999" required></label>
+      </div>
+      <h2>勤怠</h2>
+      <div class="scroll">
+        <table class="tbl tbl--form">
+          <thead><tr><th>スタッフ</th><th>出勤</th><th>退勤</th><th>休憩（分）</th><th>労働時間</th><th></th></tr></thead>
+          <tbody id="f-shifts"></tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn--ghost" id="f-add">＋ スタッフを追加</button>
+      <p class="msg" id="f-msg" role="alert"></p>
+      <div class="form__foot">
+        <button type="submit" class="btn">この内容で登録する</button>
+        <button type="button" class="btn btn--ghost" id="f-fill">入力例を入れる</button>
+        <span class="hint" id="f-state"></span>
+      </div>
+    </form>
+  </section>
+
+  <!-- ③ 月次の表 -->
+  <section class="panel" id="p-monthly" role="tabpanel" aria-labelledby="tab-monthly" hidden>
+    <div class="bar">
+      <h1>月次の表<small>2026年11月（登録済みの日報から集計）</small></h1>
+      <button class="btn btn--ghost" id="m-csv">CSV で書き出す</button>
+    </div>
+    <h2>日ごとの売上（店舗別の積み上げ）</h2>
+    <div class="chart" id="m-chart"></div>
+    <h2>店舗別の集計</h2>
+    <div class="scroll"><table class="tbl" id="t-month"></table></div>
+    <h2>スタッフ別の勤怠</h2>
+    <div class="scroll"><table class="tbl" id="t-staff"></table></div>
+  </section>
+
+  <!-- ④ しくみ -->
+  <section class="panel" id="p-how" role="tabpanel" aria-labelledby="tab-how" hidden>
+    <div class="bar"><h1>しくみ<small>実際に導入するときの構成例</small></h1></div>
+    <p>このデモはブラウザの中だけで動いていますが、実際の現場では <b>Google スプレッドシートと Google Apps Script（GAS）</b>で同じ流れを作れます。Google アカウントがあれば、新しいシステムの契約や月額の費用なしで始められます。</p>
+    <div class="scroll">
+      <svg class="flow" viewBox="0 0 900 300" role="img" aria-label="構成図。各店舗が Google フォームで日報を送ると、スプレッドシートにたまり、GAS が毎朝8時台に集計して、集計シートの更新とチャットへの通知を行う">
+        <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5b6b82"/></marker></defs>
+        <g font-size="13" fill="#1b2533">
+          <g>
+            <rect x="10" y="30" width="150" height="46" rx="8" fill="#eef2ff" stroke="#3b5bdb"/><text x="85" y="58" text-anchor="middle">渋谷店</text>
+            <rect x="10" y="90" width="150" height="46" rx="8" fill="#eef2ff" stroke="#3b5bdb"/><text x="85" y="118" text-anchor="middle">新宿店</text>
+            <rect x="10" y="150" width="150" height="46" rx="8" fill="#eef2ff" stroke="#3b5bdb"/><text x="85" y="178" text-anchor="middle">池袋店</text>
+            <rect x="10" y="210" width="150" height="46" rx="8" fill="#eef2ff" stroke="#3b5bdb"/><text x="85" y="238" text-anchor="middle">横浜店</text>
+            <text x="85" y="282" text-anchor="middle" fill="#5b6b82" font-size="12">閉店後にスマホで入力</text>
+          </g>
+          <rect x="230" y="105" width="150" height="76" rx="8" fill="#fff" stroke="#5b6b82"/>
+          <text x="305" y="138" text-anchor="middle" font-weight="700">Google フォーム</text>
+          <text x="305" y="160" text-anchor="middle" fill="#5b6b82" font-size="12">売上・客数・勤怠</text>
+          <rect x="440" y="105" width="160" height="76" rx="8" fill="#fff" stroke="#5b6b82"/>
+          <text x="520" y="138" text-anchor="middle" font-weight="700">スプレッドシート</text>
+          <text x="520" y="160" text-anchor="middle" fill="#5b6b82" font-size="12">日報シートに1行ずつ追加</text>
+          <rect x="440" y="20" width="160" height="56" rx="8" fill="#3b5bdb"/>
+          <text x="520" y="44" text-anchor="middle" fill="#fff" font-weight="700">GAS（毎朝8時台）</text>
+          <text x="520" y="63" text-anchor="middle" fill="#dbe4ff" font-size="12">集計・前日比・未提出の確認</text>
+          <rect x="680" y="60" width="200" height="60" rx="8" fill="#e6fcf5" stroke="#0c8599"/>
+          <text x="780" y="86" text-anchor="middle" font-weight="700">集計シート・月次の表</text>
+          <text x="780" y="106" text-anchor="middle" fill="#5b6b82" font-size="12">本部がいつでも見られる</text>
+          <rect x="680" y="150" width="200" height="60" rx="8" fill="#fff4e6" stroke="#e8590c"/>
+          <text x="780" y="176" text-anchor="middle" font-weight="700">チャット・メールへ通知</text>
+          <text x="780" y="196" text-anchor="middle" fill="#5b6b82" font-size="12">要確認と未提出だけを知らせる</text>
+        </g>
+        <g stroke="#5b6b82" stroke-width="1.6" fill="none" marker-end="url(#ar)">
+          <path d="M160 53 C200 53 195 130 228 135"/><path d="M160 113 C195 113 200 138 228 141"/>
+          <path d="M160 173 C195 173 200 148 228 146"/><path d="M160 233 C200 233 195 156 228 152"/>
+          <path d="M380 143 H438"/><path d="M520 105 V78"/>
+          <path d="M600 48 C640 48 640 88 678 90"/><path d="M600 56 C650 70 630 178 678 180"/>
+        </g>
+      </svg>
+    </div>
+    <div class="cols">
+      <div>
+        <h2>このデモが再現していること</h2>
+        <ul class="list">
+          <li>各店舗の日報（売上・客数・出退勤）を1件ずつ受け取る</li>
+          <li>全店の合計、前日比、客単価、人時売上高を自動で計算する</li>
+          <li>前日比 −10% 超と、日報の未提出を見つけて知らせる</li>
+          <li>月次の店舗別・スタッフ別の表を作り、CSV で書き出す</li>
+        </ul>
+      </div>
+      <div>
+        <h2>導入の進め方（例）</h2>
+        <ol class="list">
+          <li>今お使いの日報や集計表を見せていただく（30分ほど）</li>
+          <li>このデモのように、まず動く画面を作ってお見せする</li>
+          <li>実際のデータで1〜2週間ためし、表の項目を調整する</li>
+          <li>操作の手引きをお渡しして運用開始</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  このページは業務ツール制作の見本です。会社名・店舗の数値・スタッフ名はすべて架空のダミーデータで、実在の企業・人物とは関係ありません。入力した内容はこのブラウザの中だけで扱われ、どこにも送信・保存されません（ページを読み込み直すと最初の状態に戻ります）。
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
